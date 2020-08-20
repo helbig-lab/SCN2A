@@ -79,8 +79,7 @@ if(is.null(input.yaml$cluster) == T){
   else{
     input.yaml$sim_cluster <- as.character(cluster_loc)
     message('\n  Cluster specified \n')
-  }
-  
+  } 
 }if(input.yaml$cluster) == 'm'){
   input.yaml$sim_cluster <- as.character(paste0(file_path, "/sim_analyses/"))
   message('\n  Manual processing specified - Note that this may take longer \n')
