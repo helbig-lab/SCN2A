@@ -491,7 +491,7 @@ for (i in 1:nrow(gene_count)){
 }
 
 
-write.csv(gene_count,paste0(input.yaml$output_dir,"gene_count_cube_scn2a.csv"),row.names = F)
+write.csv(gene_count,paste0(input.yaml$output_dir,"sim_analyses/gene_count_cube_scn2a.csv"),row.names = F)
 
 message("\n  Cube similarity analysis - test of statistical significance ran successfully. \n ")
 stop = Sys.time()
