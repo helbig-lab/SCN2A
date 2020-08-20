@@ -1,0 +1,27 @@
+#inputs for user
+
+output_dir : /Users/Desktop/SCN2A/outputs/     # required
+file_path : raw_files/ # required
+
+#patient_phenome : raw_files/SCN2A_full.csv    # DON'T THINK THIS IS NEEDED!
+
+hpo_tree :  raw_files/HPO_is.a_tree_v0.1.2.csv     # required
+hpo_ancestor : raw_files/HPO_ancestors_v0.1.2.csv      # required
+hpo_path : raw_files/HPO_child_paths_v0.1.2.csv      # required
+
+num_of_iterations : 100000 # required default is 100000
+
+variant_file : raw_files/SCN2A_full.csv       # required
+
+sim_algorithm : 1  # optional 1 - Resnik default ; 2 - Cube
+cluster : c # c - Cluster default ; m - Manual processing
+sim_cluster: # returned by user if cluster selected
+
+sim_dir: # determined automatically by user's selected sim_algorithm
+
+#primary_analyses : #CAN PROBABLY CONSOLIDATE THESE TWO
+#frequency_analyses : 
+
+#pca_roc_analyses :
+
+#other_analyses : 
