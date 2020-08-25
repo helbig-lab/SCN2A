@@ -48,6 +48,8 @@ unique_terms <- merged$HPO %>% unique()
 # Table 1 - frequencies only
 ######
 
+message(" \n Creating frequency tables... \n ")
+
 ## Phenotypic groups
 pheno_groups <- variants$broad_phx %>% unique()
 pheno_groups <- pheno_groups[c(2, 4, 1, 5, 3)]
@@ -284,6 +286,8 @@ keep(variants, merged, ic, hpo_def, unique_terms, pheno_groups, variant_groups_2
 ######
 # Table 2 - raw counts and frequency stats
 ######
+
+message(" \n Calculating raw frequency counts... \n ")
 
 ## Phenotypic groups
 raw_counts <- hpo_def %>% filter(HPO %in% unique_terms)
