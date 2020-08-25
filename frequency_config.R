@@ -46,7 +46,7 @@ if(is.null(input.yaml$hpo_tree) == F){
 if(is.null(input.yaml$hpo_ancestor) == F){
   hpo_ancs <- read_csv(input.yaml$hpo_ancestor)
 }else{
-  message('\n  Please mention the HPO Ancestor File (Should be able to get it from [here]("https://github.research.chop.edu/KAUFMANMC/SCN2A/tree/master/raw_files") ) - Cant Proceed without that \n')
+  message('\n  Please mention the HPO Ancestor File (Should be able to get it from [here]("https://github.com/helbig-lab/SCN2A/tree/master/raw_files") ) - Cant Proceed without that \n')
   break;
 }
 
@@ -55,49 +55,18 @@ options(stringsAsFactors = F)
 if(is.null(input.yaml$hpo_path) == F){
   path <- read_csv(input.yaml$hpo_path)
 }else{
-  message('\n  Please mention the HPO Path File (Should be able to get it from [here]("https://github.research.chop.edu/KAUFMANMC/SCN2A/tree/master/raw_files")  ) - Cant Proceed without that \n')
+  message('\n  Please mention the HPO Path File (Should be able to get it from [here]("https://github.com/helbig-lab/SCN2A/tree/master/raw_files")  ) - Cant Proceed without that \n')
   break;
 }
 
 if(is.null(input.yaml$variant_file) == F){
   variant <- read_csv(input.yaml$variant_file)
 }else{
-  message('\n  Please mention the Variants File in the specified format (Should be able to get it from [here]("https://github.research.chop.edu/KAUFMANMC/SCN2A/tree/master/raw_files") ) - Cant Proceed without that \n')
+  message('\n  Please mention the Variants File in the specified format (Should be able to get it from [here]("https://github.com/helbig-lab/SCN2A/tree/master/raw_files") ) - Cant Proceed without that \n')
   break;
 }
 
-if(is.null(input.yaml$cluster) == T){
-  message('\n Please determine processing method in input config file - Cant Proceed without that \n')
-  break;
-}if(input.yaml$cluster) == 'c'){
-  cluster_loc <- readline(prompt="Enter cluster location: ")
-  if(cluster_loc == "" | cluster_loc == " " )
-    { 
-    message('\n  Cluster name invalid, please try a different location \n')
-    break;
-    }
-  else{
-    input.yaml$sim_cluster <- as.character(cluster_loc)
-    message('\n  Cluster specified \n')
-  } 
-}if(input.yaml$cluster) == 'm'){
-  input.yaml$sim_cluster <- as.character(paste0(file_path, "/sim_analyses/"))
-  message('\n  Manual processing specified - Note that this may take longer \n')
-}else{
-input.yaml$sim_cluster <- as.character(paste0(file_path, "/sim_analyses/"))
-message('\n  Default to manual processing - Note that this may take longer \n')
-}
 
-if(is.null(input.yaml$sim_algorithm) == T){
-  message('\n Please determine algorithm in input config file - Cant Proceed without that \n')
+if(is.null(input.yaml$freq_dir) == T){
+  message('\n Please determine frequency analysis directory in input config file - Cant Proceed without that \n')
   break;
-}if(input.yaml$sim_algorithm) == 1){
-  input.yaml$sim_dir <- as.character("/sim_analyses/resnik/")
-  message('\n  Similarity analysis algorithm selected - Resnik \n')
-}if(input.yaml$sim_algorithm) == 2){
- input.yaml$sim_dir <- as.character("/sim_analyses/cube/")
- message('\n  Similarity analysis algorithm selected - Cube \n')
-}else{
-input.yaml$sim_dir <- as.character("/sim_analyses/resnik/")
-message('\n  Default to Resnik Similarity analysis algorithm \n')
-}
