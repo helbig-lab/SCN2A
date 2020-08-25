@@ -21,6 +21,7 @@ sim_dir: # determined automatically by user's selected sim_algorithm
 
 #primary_analyses : #CAN PROBABLY CONSOLIDATE THESE TWO
 #frequency_analyses : 
+freq_dir: frequency_analyses #required
 
 #pca_roc_analyses :
 
