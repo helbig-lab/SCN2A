@@ -3,11 +3,13 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Starting frequency anaylses... \n ")
 
+`%nin%` <- Negate(`%in%`)
+
 ######
 # Read in files
 ######
 
-variants <- read.csv(paste0(input.yaml$file_path, "SCN2A_full.csv"), 
+variants <- read.csv(paste0("SCN2A_full_V", version, ".csv"), 
                      stringsAsFactors = FALSE) %>% 
   filter(!is.na(famID)) %>% 
   filter(variant_type_1 != "exclude") %>% 
