@@ -7,18 +7,18 @@ Using the Human Phenotype Ontology (HPO) and a cohort of patients annotated via 
 * [R](https://www.r-project.org/) with packages tidyverse, stringr, dplyr, readr and memoise.
 
 ### Steps to Run:
-* Clone the repository, modify the [config](https://github.research.chop.edu/KAUFMANMC/SCN2A/blob/master/input.yml) file.
+* Clone the repository, modify the [config](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) file.
 
-* In the [config file](https://github.research.chop.edu/KAUFMANMC/SCN2A/blob/master/input.yml) mention the the field output_dir, this is where your output files would be written to.  Processing methods and algorithms of calculation for similarity analysis can be specified by the user in the terminal after running the below script. 
+* In the [config file](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) mention the the field output_dir, this is where your output files would be written to.  Processing methods and algorithms of calculation for similarity analysis can be specified by the user in the terminal after running the below script. 
 
-* Run [R file](https://github.research.chop.edu/KAUFMANMC/SCN2A/blob/master/sim_config.R), specifying the YAML config file using the --input flag .
+* Run [R file](https://github.com/helbig-lab/SCN2A/blob/master/master_config.R), specifying the YAML config file using the --input flag .
 
 ```
-~/Rscript hpo_dee_sim.R --input /path_to/input.yml
+~/Rscript master_config.R --input /path_to/input.yml
 ```
 
 ### Running the tests
-There are test files available here: [Files](https://github.research.chop.edu/KAUFMANMC/SCN2A/tree/master/raw_files). Ensure that these files are linked appropriately in the [config file](https://github.research.chop.edu/KAUFMANMC/SCN2A/blob/master/input.yml) as such:
+There are test files available here: [Files](https://github.com/helbig-lab/SCN2A/tree/master/raw_files). Ensure that these files are linked appropriately in the [config file](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) as such:
 
 ```
 
