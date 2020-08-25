@@ -1431,4 +1431,8 @@ write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/domain_group
 fdr_adjust_or = TRUE # filter or > 1
 source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
 write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/domain_groups_sig_assoc_POS_OR.csv"), row.names = FALSE)
+          
+message("\n  ...Frequency analyses complete \n ")
+stop = Sys.time()
+stop - start
 
