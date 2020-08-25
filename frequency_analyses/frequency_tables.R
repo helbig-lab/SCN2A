@@ -9,14 +9,14 @@ message(" \n Starting frequency anaylses... \n ")
 # Read in files
 ######
 
-variants <- read.csv(paste0("SCN2A_full_V", version, ".csv"), 
+variants <- read.csv(input.yaml$variant_file), 
                      stringsAsFactors = FALSE) %>% 
   filter(!is.na(famID)) %>% 
   filter(variant_type_1 != "exclude") %>% 
   filter(grepl("HP:[0-9]", HPO)) %>% 
   unique()
 
-hpo_def <- read.csv(paste0(input.yaml$file_path, "HPO_ancestors_v0.1.2.csv"), 
+hpo_def <- read.csv(input.yaml$hpo_ancestor), 
                     stringsAsFactors = FALSE) %>% 
   rename(HPO = term) %>% 
   select(HPO, def) %>% 
