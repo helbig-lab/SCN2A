@@ -354,7 +354,7 @@ for (i in 1:length(pheno_groups)) {
 
 raw_counts <- raw_counts[order(-raw_counts$DEE_f),]
 
-write.csv(raw_counts, "frequency_analyses/phenotypic_groups_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"phenotypic_groups_raw_counts.csv"), row.names = FALSE)
 
 
 ## Variant classes - "variant_type_2"
@@ -407,7 +407,7 @@ for (i in 1:length(variant_groups_2)) {
 
 raw_counts <- raw_counts[order(-raw_counts$missense_f),]
 
-write.csv(raw_counts, "frequency_analyses/ptv_missense_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"ptv_missense_raw_counts.csv"), row.names = FALSE)
 
 
 ## Variant classes - "variant_type_3"
@@ -465,7 +465,7 @@ for (i in 1:length(variant_groups_3)) {
 
 raw_counts <- raw_counts[order(-raw_counts$other_missense_f),]
 
-write.csv(raw_counts, "frequency_analyses/ptv_missense_S5.S6_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"ptv_missense_S5.S6_raw_counts.csv"), row.names = FALSE)
 
 
 ## Variant classes - "missense_not_S5_S6"
@@ -523,7 +523,7 @@ for (i in 1:length(variant_groups_4)) {
 
 raw_counts <- raw_counts[order(-raw_counts$other_missense_f),]
 
-write.csv(raw_counts, "frequency_analyses/missense_not_s5_s6_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"missense_not_s5_s6_raw_counts.csv"), row.names = FALSE)
 
 
 ## Recurrent Variant groups
@@ -567,7 +567,7 @@ for (i in 1:length(recur_groups)) {
   
 }
 
-write.csv(raw_counts, "frequency_analyses/recurrent_var_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"recurrent_var_raw_counts.csv"), row.names = FALSE)
 
 
 ## Segment groups
@@ -613,7 +613,7 @@ for (i in 1:length(segment_groups)) {
   
 }
 
-write.csv(raw_counts, "frequency_analyses/segment_groups_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"segment_groups_raw_counts.csv"), row.names = FALSE)
 
 ## Domain groups
 raw_counts <- hpo_def %>% filter(HPO %in% unique_terms)
@@ -658,12 +658,13 @@ for (i in 1:length(domain_groups)) {
   
 }
 
-write.csv(raw_counts, "frequency_analyses/domain_groups_raw_counts.csv", row.names = FALSE)
+write.csv(raw_counts, paste0(input.yaml$freq_dir,"domain_groups_raw_counts.csv"), row.names = FALSE)
 
 
 
 
 keep(variants, merged, ic, hpo_def, unique_terms, pheno_groups, variant_groups_2, variant_groups_3, recur_groups, merged_2, sure = T)
+
 
 ######
 # Table 3 - Fisher's test phenotypic groups
@@ -768,19 +769,18 @@ sig_test$PHENO_GROUP <- case_when(sig_test$PHENO_GROUP == "encephalopathy" ~ "DE
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/phenotypic_groups_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/phenotypic_groups_sig_assoc_ALL_OR.csv"), row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/phenotypic_groups_sig_assoc_POS_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/phenotypic_groups_sig_assoc_POS_OR.csv"), row.names = FALSE)
 
   
 
 ######
 # Table 3 - Fisher's test variant missense vs PTV groups
 ######
-
 
 sig_test <- matrix(nrow=0,ncol=13) %>% as.data.frame()
 names(sig_test) <- c('HPO','VAR_GROUP', 'pval', "OR", "OR_adjusted", "OR.lower", "OR.upper",
@@ -879,17 +879,17 @@ sig_test <- sig_test %>% select(1, 14, 2:13)
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/ptv_missense_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/ptv_missense_sig_assoc_ALL_OR.csv"), row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/ptv_missense_sig_assoc_POS_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/ptv_missense_sig_assoc_POS_OR.csv"_, row.names = FALSE)
 
+          
 ######
 # Table 3 - Fisher's test variant missense vs PTV groups WITH S5-S6
 ######
-
 
 sig_test <- matrix(nrow=0,ncol=13) %>% as.data.frame()
 names(sig_test) <- c('HPO','VAR_GROUP', 'pval', "OR", "OR_adjusted", "OR.lower", "OR.upper",
@@ -988,12 +988,12 @@ sig_test <- sig_test %>% select(1, 14, 2:13)
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/ptv_missense_S5.S6_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/ptv_missense_S5.S6_sig_assoc_ALL_OR.csv"_, row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/ptv_missense_S5.S6_sig_assoc_POS_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/ptv_missense_S5.S6_sig_assoc_POS_OR.csv"), row.names = FALSE)
 
 
 ######
@@ -1098,12 +1098,12 @@ sig_test <- sig_test %>% select(1, 14, 2:13)
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/missense_not_S5.S6_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/missense_not_S5.S6_sig_assoc_ALL_OR.csv"), row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/missense_not_S5.S6_sig_assoc_POS_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0,(input.yaml$output_dir,"frequency_analyses/missense_not_S5.S6_sig_assoc_POS_OR.csv"), row.names = FALSE)
 
 
 ############
@@ -1204,12 +1204,12 @@ sig_test <- sig_test %>% select(1, 14, 2:13)
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/recurrent_var_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/recurrent_var_sig_assoc_ALL_OR.csv"), row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/recurrent_var_sig_assoc_POS_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/recurrent_var_sig_assoc_POS_OR.csv"), row.names = FALSE)
 
 
 ######
@@ -1315,12 +1315,12 @@ sig_test$SEGMENT_GROUP <- case_when(TRUE~ sig_test$SEGMENT_GROUP)
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/segment_groups_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/segment_groups_sig_assoc_ALL_OR.csv"), row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/segment_groups_sig_assoc_POS_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/segment_groups_sig_assoc_POS_OR.csv"), row.names = FALSE)
 
 ######
 # Table 3 - Fisher's test domain groups
@@ -1425,10 +1425,10 @@ sig_test$DOMAIN_GROUP <- case_when(TRUE~ sig_test$DOMAIN_GROUP)
 
 hpo_sig <- sig_test
 fdr_adjust_or = FALSE # do not filter or > 1
-source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/domain_groups_sig_assoc_ALL_OR.csv", row.names = FALSE)
+source("FDR.R")
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/domain_groups_sig_assoc_ALL_OR.csv"), row.names = FALSE)
 
 fdr_adjust_or = TRUE # filter or > 1
 source("/Volumes/helbig_lab/projects/SCN2A/v13/primary_analyses/FDR.R")
-write.csv(fdr_res, "frequency_analyses/domain_groups_sig_assoc_POS_OR.csv", row.names = FALSE)
+write.csv(fdr_res, paste0(input.yaml$output_dir,"frequency_analyses/domain_groups_sig_assoc_POS_OR.csv"), row.names = FALSE)
 
