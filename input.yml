@@ -28,3 +28,4 @@ freq_dir: frequency_analyses #required
 
 # Misc. Files
 #other_analyses : 
+pos_ic : raw_files/post_IC.csv # default; post_IC_manual.csv if created via 'compose_base_prop_ic.R' script
