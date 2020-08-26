@@ -6,12 +6,12 @@ message("\n  ...Checking for analyses to run... \n ")
 
 #Term propagation
 if(is.null(input.yaml$pos_ic) == F ){
-  next;
+  pos_ic <- read_csv(input.yaml$pos_ic)
 }
 else{
     message("\n  Manually propagating information content... \n ")
-    source("raw_files/compose_base_prop_ic.R))
-    }
+    source("raw_files/compose_base_prop_ic.R")
+    input.yaml$pos_ic <- read_csv("raw_files/pos_IC_manual.csv")
 }
 
 
