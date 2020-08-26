@@ -5,10 +5,10 @@ message(" \n Begin Cube chunking and comparison of patients \n ")
 
 #HPO terms in cohort (base)
 
-pat_table_prop <- read_csv(paste0(input.yaml$file_path, "pos_prop.csv"))
+pat_table_prop <- read_csv(input.yaml$file_path, "pos_prop.csv"))
 
 #local_IC - use most recent version 
-local_IC <- read_csv(paste0(input.yaml$file_path,"pos_IC.csv")) 
+local_IC <- read_csv(input.yaml$pos_ic) 
 
 prop_temp <- pat_table_prop %>% 
   left_join(local_IC %>% select(HPO, prop.IC))
