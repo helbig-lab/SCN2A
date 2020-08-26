@@ -36,3 +36,14 @@ Using the Human Phenotype Ontology (HPO) and a cohort of patients annotated via 
 
 ## Frequency Analyses
 Using the Human Phenotype Ontology (HPO) and a cohort of patients annotated via HPO terms and VCF files, these scripts find frequency of phenotypic terms by specific groupings. For example, this analysis could be used to determine the frequency of occurrences of the term 'seizures' in patients with missense variants.  These frequencies are compared to frequencies in the remainder of each group to determine likelihood of occurence within that group. This helps determine which HPO terms may be causitively associated with a specific group. 
+
+## Optional - Term Propagation
+Although not necessary to run these scripts, as example CSVs are already provided, we've included a term propagation script within the [raw files directory](https://github.com/helbig-lab/SCN2A/tree/master/raw_files). This allows users to generate the base and propagated HPO terms on their own in order to view the process first hand. To run the propagation scripts:
+
+* As with the standard test run of these scripts, run the [R file](https://github.com/helbig-lab/SCN2A/blob/master/master_config.R), specifying the YAML config file using the --input flag (see below).
+
+```
+~/Rscript master_config.R --input /path_to/input.yml
+```
+* In order to create manual base and propogation files, change the yaml default parameters ``` test ``` to ``` test ``` and redirect the base and propogation file locations to  ``` test ``` and ``` test ``` respectively.
+
