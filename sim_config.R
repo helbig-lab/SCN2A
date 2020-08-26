@@ -37,14 +37,14 @@ if(is.null(input.yaml$file_path) == T){
 
 
 if(is.null(input.yaml$hpo_tree) == F){
-  path <- read_csv(input.yaml$hpo_tree)
+  hpo_tree <- read_csv(input.yaml$hpo_tree)
 }else{
   message('\n  Please mention the HPO Tree File (Should be able to get it from [here]("https://github.com/helbig-lab/SCN2A/tree/master/raw_files")  ) - Cant Proceed without that \n')
   break;
 }
 
 if(is.null(input.yaml$hpo_ancestor) == F){
-  hpo_ancs <- read_csv(input.yaml$hpo_ancestor)
+  hpo_ancestor <- read_csv(input.yaml$hpo_ancestor)
 }else{
   message('\n  Please mention the HPO Ancestor File (Should be able to get it from [here]("https://github.com/helbig-lab/SCN2A/tree/master/raw_files") ) - Cant Proceed without that \n')
   break;
@@ -53,7 +53,7 @@ if(is.null(input.yaml$hpo_ancestor) == F){
 options(stringsAsFactors = F)
 
 if(is.null(input.yaml$hpo_path) == F){
-  path <- read_csv(input.yaml$hpo_path)
+  hpo_path <- read_csv(input.yaml$hpo_path)
 }else{
   message('\n  Please mention the HPO Path File (Should be able to get it from [here]("https://github.com/helbig-lab/SCN2A/tree/master/raw_files")  ) - Cant Proceed without that \n')
   break;
