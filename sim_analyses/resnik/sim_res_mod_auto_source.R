@@ -10,7 +10,7 @@ message(" \n Resnik mod chunking source file running... \n \n ")
 #Add IC Data
 
 #local_IC - use most recent version 
-local_IC <- read_csv(paste0(input.yaml$file_path,"pos_IC.csv")) 
+local_IC <- read_csv(input.yaml$pos_ic) 
 
 
 #HPO terms in cohort (base and propagated)
