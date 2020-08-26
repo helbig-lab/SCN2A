@@ -1,17 +1,16 @@
 #Compose Base and Prop
 
 library(readr)
-# library(readxl)
 library(tidyverse)
 library(Hmisc)
 
-setwd("/Volumes/helbig_lab/projects/SCN2A/v15/")
-# setwd("/mnt/isilon/helbig_lab/projects/SCN2A/v15/")
+start <- Sys.time()
+message(" \n Begin propagation... \n ")
 
-hpo_ancs <- read_csv("HPO_ancestors_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv") %>% 
+hpo_ancs <- read_csv(input.yaml$hpo_ancestor) %>% 
   rename(HPO = term)
 
-hpo_child <- read_csv("HPO_child_paths_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv") %>% 
+hpo_child <- read_csv(input.yaml$hpo_path) %>% 
   rename(HPO = term) %>% 
   mutate(children = paste0(HPO,";", children)) %>% 
   select(-X1)
@@ -21,7 +20,7 @@ hpo_neg_child <- hpo_child %>%
   mutate(children = gsub("H","N", children))
   
 
-tot_base <- read_csv("SCN2A_full_V15.csv") %>% 
+tot_base <- read_csv(input.yaml$variant_file) %>% 
   # rename(famID = ID, HPO = term_id) %>% 
   # mutate(famID = paste0("fam",famID)) %>% 
   filter(variant_type_1 != "exclude") %>% 
@@ -31,7 +30,7 @@ tot_base <- read_csv("SCN2A_full_V15.csv") %>%
 
 
 
-write_csv(tot_base, "full_base_v15.csv")
+write_csv(tot_base, paste0(input.yaml$file_path,"full_base.csv"))
 
 ########
 # Base Files
@@ -46,8 +45,8 @@ pos_base <- tot_base %>%
   filter(grepl("HP:[[:digit:]]", HPO)) %>% 
   unique
 
-write_csv(neg_base, "neg_base_v15.csv")
-write_csv(pos_base, "pos_base_v15.csv")
+write_csv(neg_base, paste0(input.yaml$file_path,"neg_base_manual.csv"))
+write_csv(pos_base, paste0(input.yaml$file_path,"pos_base_manual.csv"))
 
 ########
 # Prop Files
@@ -75,24 +74,24 @@ neg_prop <- neg_base %>%
   filter(!is.na(HPO), HPO !="NA") %>% 
   unique
 
-write_csv(neg_prop, "neg_prop_v15.csv")
-write_csv(pos_prop, "pos_prop_v15.csv")
+write_csv(neg_prop, paste0(input.yaml$file_path,"neg_prop_manual.csv"))
+write_csv(pos_prop, paste0(input.yaml$file_path,"pos_prop_manual.csv"))
 
 
 full_prop <- neg_prop %>% rbind(pos_prop)
 
-write_csv(full_prop, "full_prop_v15.csv")
+write_csv(full_prop, paste0(input.yaml$file_path,"full_prop_manual.csv"))
 
 
 
 #Negative Prop Pruned
 
-neg_filter <- read_csv("/Volumes/helbig_lab/projects/SCN2A/v13/pruned_neg_filter_terms_v13.csv")
+neg_filter <- read_csv(paste0(input.yaml$file_path,"pruned_neg_filter_terms.csv"))
 
 neg_prop_filt <- neg_prop %>% 
   filter(HPO %in% neg_filter$term)
 
-write_csv(neg_prop_filt, "neg_prop_pruned_v15.csv")
+write_csv(neg_prop_filt, paste0(input.yaml$file_path,"neg_prop_pruned_manual.csv"))
 
 ########################
 # Create IC
@@ -108,7 +107,7 @@ neg_base_ct <- neg_base %>%
   count(HPO) %>% 
   mutate(freq = n/length(unique(tot_base$famID)))
 
-# pos_base = read_csv("/Volumes/helbig_lab/Dropbox/galerp/SCN2A/KC_SCN2A/scn2a_v2/scn2a_full_V4.csv") %>% 
+# pos_base = read_csv(paste0(input.yaml$file_path,"scn2a_full_V4.csv")) %>% 
 #   rename(famID = ID, HPO = term_id) %>% 
 #   # filter(!grepl("NP", HPO), grepl("HP:[[:digit:]]", HPO)) %>% 
 #   filter(grepl("HP:[[:digit:]]", HPO)) %>% 
@@ -122,10 +121,10 @@ pos_base_ct <- pos_base %>%
   mutate(base.IC = -log2(freq_base)) %>% 
   select(-n)
 
-# hpo_ancs <- read_csv("/Volumes/helbig_lab/Dropbox/galerp/HPO_toolbox/HPO_ancestors_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv") %>% 
+# hpo_ancs <- read_csv(input.yaml$hpo_ancestor) %>% 
 #   rename(HPO = term) 
 # 
-# hpo_child <- read_csv("/Volumes/helbig_lab/Dropbox/galerp/HPO_toolbox/HPO_child_paths_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv") %>% 
+# hpo_child <- read_csv("input.yaml$hpo_path) %>% 
 #   rename(HPO = term) %>% 
 #   mutate(children = paste0(HPO,";",children)) %>% 
 #   mutate(HPO = gsub("H","N", HPO)) %>% 
@@ -148,6 +147,10 @@ pos_IC[is.na(pos_IC)] <- 0
 
 length(unique(pos_prop$HPO))
 
-write_csv(pos_IC,"pos_IC_v15.csv")
+write_csv(pos_IC,paste0(input.yaml$file_path,"pos_IC_manual.csv"))
+
+message("\n  Propagation complete \n ")
+stop = Sys.time()
+stop - start
 
 
