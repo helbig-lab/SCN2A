@@ -4,6 +4,17 @@ message(" \n Starting config file... \n ")
 
 message("\n  ...Checking for analyses to run... \n ")
 
+#Term propagation
+if(is.null(input.yaml$pos_ic) == F ){
+  next;
+}
+else{
+    message("\n  Manually propagating information content... \n ")
+    source("raw_files/compose_base_prop_ic.R))
+    }
+}
+
+
 #Similarity analyses
 if(is.null(input.yaml$sim_dir) == F ){
   message("\n  Running similarity analysis... \n ")
