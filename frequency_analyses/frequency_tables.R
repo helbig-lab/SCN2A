@@ -27,7 +27,7 @@ prop <- read.csv(paste0(input.yaml$file_path, "pos_base.csv"),
                  stringsAsFactors = FALSE)
 
 # Frequency - all
-ic <- read.csv(paste0(input.yaml$file_path,"pos_IC.csv"), 
+ic <- read.csv(input.yaml$pos_ic, 
                stringsAsFactors = F) %>% select(HPO, freq_prop)
 
 
