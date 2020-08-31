@@ -6,10 +6,10 @@ library(ROCR)
 library(corrplot)
 library(RColorBrewer)
 
-version = 15
+start <- Sys.time()
+message(" \n Starting PCA variant anaylsis... \n ")
 
-# setwd(paste0("/Volumes/helbig_lab/projects/SCN2A/v", version, "/"))
-# setwd(paste0("/mnt/isilon/helbig_lab/projects/SCN2A/v", version, "/pca_roc_analyses/run"))
+setwd(input.yaml$pca_dir)
 
 ####################################
 # 1. PCA
@@ -19,22 +19,22 @@ version = 15
 # Data input
 ################## 
 
-scn2a <- read.csv(paste0("SCN2A_full_V", version, ".csv"), stringsAsFactors = F) %>% 
+scn2a <- read.csv(input.yaml$variant_file, stringsAsFactors = F) %>% 
   filter(variant_type_1 != "exclude") %>%
   filter(grepl("HP:[0-9]", HPO)) %>% 
   unique()
 
-func_variants <- read.csv("pca_roc_analyses/SCN2A_functional_variant_list.csv", stringsAsFactors = F) %>% 
+func_variants <- read.csv(input.yaml$functional_variant, stringsAsFactors = F) %>% 
   rename(effect = Overall.Effect) %>% 
   select(variant, effect)
 
-scn2a_pos <- read.csv(paste0("pos_prop_v", version, ".csv"), stringsAsFactors = FALSE)
-scn2a_neg <- read.csv(paste0("neg_prop_pruned_v", version, ".csv"), stringsAsFactors = FALSE)
+scn2a_pos <- read.csv(input.yamlpos_prop, stringsAsFactors = FALSE)
+scn2a_neg <- read.csv(input.yaml$neg_prop, stringsAsFactors = FALSE)
 scn2a_prop <- scn2a_pos %>% rbind(scn2a_neg)
 rm(scn2a_pos, scn2a_neg)
 
 # Hpo dictionary
-pos_hpo <- read.csv("HPO_ancestors_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv", stringsAsFactors = FALSE) %>% 
+pos_hpo <- read.csv(input.yaml$hpo_ancestor, stringsAsFactors = FALSE) %>% 
   select(term, def) %>% 
   rename(HPO = term) %>% 
   mutate(HPO = trimws(HPO))
@@ -78,7 +78,7 @@ scn2a <- scn2a %>% filter(!is.na(variant_type_2))
 ################## 
 
 # Output from 'run_variant_ks.R'
-load("pca_roc_analyses/expand_k/functional_variant_logpca_model_k3.RData")
+load("pca_roc_analyses/functional_variant_logpca_model_k3.RData")
 
 ################## 
 # Analysis
@@ -103,6 +103,9 @@ colnames(loadings) = c("PC1", "PC2", "PC3", "HPO")
 loadings <- loadings %>% left_join(hpo_all) %>% select(HPO, def, 1:(ncol(loadings)-1))
 
 ###
+
+start <- Sys.time()
+message(" \n Starting ROC variant anaylsis... \n ")
 
 ####################################
 # 2. ROC
@@ -222,7 +225,7 @@ out_roc <- df.long %>%
                          PC == "PC2" ~ auc_all[2],
                          PC == "PC3" ~ auc_all[3]))
 
-write.csv(out_roc, "variant_ROC.csv")
+write.csv(out_roc, paste0(input.yaml$output_dir,"variant_ROC.csv"))
 
 ###
 # PPV data for PC2
@@ -256,5 +259,9 @@ ppv_variants_1[ppv_variants_1$functional_1 == "Missense GOF",]$functional_1 = "G
 ppv_variants_1[ppv_variants_1$functional_1 == "Missense LOF + PTV",]$functional_1 = "LoF"
 ppv_variants_1[ppv_variants_1$functional_1 == "Missense other",]$functional_1 = "none"
 
-write.csv(ppv_variants_1, "variant_pred_PC2_PPV.csv", row.names = F)
+write.csv(ppv_variants_1, paste0(input.yaml$output_dir,"variant_pred_PC2_PPV.csv", row.names = F))
+
+message("\n  ...variant PCA-ROC analysis complete \n ")
+stop = Sys.time()
+stop - start
 
