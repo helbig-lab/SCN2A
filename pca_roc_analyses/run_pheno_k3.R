@@ -1,30 +1,25 @@
-# Logistic PCA for phenogroups (n=413)
+# Logistic PCA for phenogroups
 
 library(tidyverse)
 library(Hmisc)
 library(logisticPCA)
 
-version = 15
-
-# setwd(paste0("/Volumes/helbig_lab/projects/SCN2A/v", version, "/"))
-# setwd(paste0("/mnt/isilon/helbig_lab/projects/SCN2A/v", version, "/pca_roc_analyses/expand_k"))
-
 ################## 
 # Data input
 ################## 
 
-scn2a <- read.csv(paste0("SCN2A_full_V", version, ".csv"), stringsAsFactors = F) %>% 
+scn2a <- read.csv(input.yaml$variant_file, stringsAsFactors = F) %>% 
   filter(variant_type_1 != "exclude") %>%
   filter(grepl("HP:[0-9]", HPO)) %>% 
   unique()
 
-scn2a_pos <- read.csv(paste0("pos_prop_v", version, ".csv"), stringsAsFactors = FALSE)
-scn2a_neg <- read.csv(paste0("neg_prop_pruned_v", version, ".csv"), stringsAsFactors = FALSE)
+scn2a_pos <- read.csv(input.yaml$pos_prop, stringsAsFactors = FALSE)
+scn2a_neg <- read.csv(input.yaml$neg_prop, stringsAsFactors = FALSE)
 scn2a_prop <- scn2a_pos %>% rbind(scn2a_neg)
 rm(scn2a_pos, scn2a_neg)
 
 # Hpo dictionary
-pos_hpo <- read.csv("HPO_ancestors_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv", stringsAsFactors = FALSE) %>% 
+pos_hpo <- read.csv(input.yaml$hpo_ancestor, stringsAsFactors = FALSE) %>% 
   select(term, def) %>% 
   rename(HPO = term) %>% 
   mutate(HPO = trimws(HPO))
