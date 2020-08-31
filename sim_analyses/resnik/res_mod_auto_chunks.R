@@ -3,6 +3,8 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Begin Resnik chunking and comparison of patients \n ")
 
+setwd(input.yaml$sim_dir)
+
 #HPO terms in cohort (base)
 
 pat_table_base <- read_csv(paste0(input.yaml$file_path, "pos_base.csv"))
