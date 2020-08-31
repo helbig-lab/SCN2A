@@ -7,6 +7,8 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Resnik mod chunking source file running... \n \n ")
 
+setwd(input.yaml$sim_dir)
+
 #Add IC Data
 
 #local_IC - use most recent version 
