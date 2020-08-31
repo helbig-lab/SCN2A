@@ -4,6 +4,8 @@ library(tidyverse)
 library(Hmisc)
 library(logisticPCA)
 
+setwd(input.yaml$pca_dir)
+
 ################## 
 # Data input
 ################## 
