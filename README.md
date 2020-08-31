@@ -1,7 +1,7 @@
 # SCN2A
 
 ### Requirements:
-* [R](https://www.r-project.org/) with packages tidyverse, stringr, dplyr, Hmisc, memoise, readr, logisticPCA, ROCR, corrplot, and RColorBrewer.
+* [R](https://www.r-project.org/) with packages tidyverse, stringr, dplyr, Hmisc, memoise, reshape2, readr, logisticPCA, ROCR, corrplot, and RColorBrewer.
 
 ### Steps to Run:
 * Clone the repository, modify the [config](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) file.
