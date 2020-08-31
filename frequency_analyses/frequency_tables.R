@@ -3,6 +3,8 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Starting frequency anaylses... \n ")
 
+setwd(input.yaml$freq_dir)
+
 `%nin%` <- Negate(`%in%`)
 
 ######
