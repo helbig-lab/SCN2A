@@ -138,8 +138,6 @@ rownames(sim_score) = cor_names
 ##Generate required tables and dataframes
 ######
 #Unpack fill with famIDs and their corresponding variants
-print("create famID tables to combine with sim scores")
-print(Sys.time())
 
 famIDs_var = variants %>%
   dplyr::rename(variant = var) %>%
@@ -335,8 +333,6 @@ names(gene_count) <- c("gene","n_pats","pairs","av_sim","median_sim","mode_sim",
 
 gene_count <- gene_count %>% mutate(gene = gene_x)
 
-print("start interating through gene_count for sim score creation")
-print(Sys.time())
 #Finding the average, median, and mode similarity,for each gene in the cohort
 for (i in 1:nrow(gene_count)) {
   name_x <- subset(pair_corrected,pair_corrected$gene == as.character(gene_count[i,c("gene")]))
@@ -497,3 +493,4 @@ write.csv(gene_count,paste0(input.yaml$output_dir,"sim_analyses/gene_count_cube_
 
 message("\n  Cube similarity analysis - test of statistical significance ran successfully. \n ")
 stop = Sys.time()
+stop-start
