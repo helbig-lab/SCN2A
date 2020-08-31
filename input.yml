@@ -20,11 +20,11 @@ sim_cluster: # returned by user if cluster selected
 sim_dir: # determined automatically by user's selected sim_algorithm
 
 # Frequency Files
-#primary_analyses : #CAN PROBABLY CONSOLIDATE THESE TWO
 freq_dir: frequency_analyses #required
 
 # PCA Files
-#pca_roc_analyses :
+pca_dir : pca_roc_analyses #required
+functional_variant : raw_files/SCN2A_functional_variant_list.csv #required
 
 # Misc. Files
 #other_analyses : 
