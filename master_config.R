@@ -81,6 +81,10 @@ else{
     message("\n  Manually propagating information content... \n ")
     source("raw_files/compose_base_prop_ic.R")
     input.yaml$pos_ic <- read_csv("raw_files/pos_IC_manual.csv")
+  if(is.null(input.yaml$pos_ic) == T){
+    message("\n  Must use default propagation file or run compose_base_prop_ic.R to continue analyses... \n ")
+    break;
+  }
 }
 
 
