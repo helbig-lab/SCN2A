@@ -25,6 +25,8 @@ freq_dir: frequency_analyses #required
 # PCA Files
 pca_dir : pca_roc_analyses #required
 functional_variant : raw_files/SCN2A_functional_variant_list.csv #required
+pos_prop : raw_files/pos_prop.csv
+neg_prop : raw_files/neg_prop.csv
 
 # Misc. Files
 #other_analyses : 
