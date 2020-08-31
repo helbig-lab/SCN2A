@@ -3,6 +3,8 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Begin Resnik iteration source file \n ")
 
+setwd(input.yaml$sim_dir)
+
 
 sim_score = read_csv(paste0(input.yaml$sim_dir,"mod_sim_scn2a.csv"))
 sim_score<- do.call(data.frame, lapply(sim_score, function(x) {
