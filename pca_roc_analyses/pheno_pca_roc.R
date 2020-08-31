@@ -165,7 +165,7 @@ for (pcx in unique(summary_roc$PC)) {
 }
 
 # Output for ROC performance for phenogroups
-write.csv(summary_roc, paste0(input.yaml$output_dir,"phenogroup_roc_summary.csv"))
+write.csv(summary_roc, paste0(input.yaml$output_dir,"pca_roc_analyses/phenogroup_roc_summary.csv"))
 
 #########
 # ROC phenotypic group specific comparisons
@@ -227,7 +227,7 @@ for (pcx in 1:3) {
   }
   
   corr_table[is.na(corr_table)] = 0
-  write.csv(corr_table, paste0(input.yaml$output_dir,"pheno_roc_performance_PC", pcx, "_matrix.csv"), row.names = T)
+  write.csv(corr_table, paste0(input.yaml$output_dir,"pca_roc_analyses/pheno_roc_performance_PC", pcx, "_matrix.csv"), row.names = T)
   
 }
 
