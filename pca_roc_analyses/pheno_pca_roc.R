@@ -5,10 +5,10 @@ library(ROCR)
 library(corrplot)
 library(RColorBrewer)
 
-version = 15
+start <- Sys.time()
+message(" \n Starting PCA pheno anaylsis... \n ")
 
-# setwd(paste0("/Volumes/helbig_lab/projects/SCN2A/v", version, "/"))
-# setwd(paste0("/mnt/isilon/helbig_lab/projects/SCN2A/v", version, "/"))
+setwd(input.yaml$pca_dir)
 
 ####################################
 # 1. PCA
@@ -18,18 +18,18 @@ version = 15
 # Data input
 ################## 
 
-scn2a <- read.csv(paste0("SCN2A_full_V", version, ".csv"), stringsAsFactors = F) %>% 
+scn2a <- read.csv(input.yaml$variant_file, stringsAsFactors = F) %>% 
   filter(variant_type_1 != "exclude") %>%
   filter(grepl("HP:[0-9]", HPO)) %>% 
   unique()
 
-scn2a_pos <- read.csv(paste0("pos_prop_v", version, ".csv"), stringsAsFactors = FALSE)
-scn2a_neg <- read.csv(paste0("neg_prop_pruned_v", version, ".csv"), stringsAsFactors = FALSE)
+scn2a_pos <- read.csv(input.yaml$pos_prop, stringsAsFactors = FALSE)
+scn2a_neg <- read.csv(input.yaml$neg_prop, stringsAsFactors = FALSE)
 scn2a_prop <- scn2a_pos %>% rbind(scn2a_neg)
 rm(scn2a_pos, scn2a_neg)
 
 # Hpo dictionary
-pos_hpo <- read.csv("HPO_ancestors_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv", stringsAsFactors = FALSE) %>% 
+pos_hpo <- read.csv(input.yaml$hpo_ancestor, stringsAsFactors = FALSE) %>% 
   select(term, def) %>% 
   rename(HPO = term) %>% 
   mutate(HPO = trimws(HPO))
@@ -55,7 +55,7 @@ rm(neg_hpo)
 ################## 
 
 # Output from 'run_pheno_ks.R'
-load("pca_roc_analyses/expand_k/phenogroup_logpca_model_k3.RData")
+load("pca_roc_analyses/phenogroup_logpca_model_k3.RData")
 
 ################## 
 # Analysis
@@ -80,6 +80,9 @@ colnames(loadings) = c("PC1", "PC2", "PC3", "HPO")
 loadings <- loadings %>% left_join(hpo_all) %>% select(HPO, def, 1:(ncol(loadings)-1))
 
 ###
+
+start <- Sys.time()
+message(" \n Starting ROC pheno anaylsis... \n ")
 
 ####################################
 # 2. ROC
@@ -162,7 +165,7 @@ for (pcx in unique(summary_roc$PC)) {
 }
 
 # Output for ROC performance for phenogroups
-write.csv(summary_roc, "phenogroup_roc_summary.csv") 
+write.csv(summary_roc, paste0(input.yaml$output_dir,"phenogroup_roc_summary.csv"))
 
 #########
 # ROC phenotypic group specific comparisons
@@ -224,7 +227,10 @@ for (pcx in 1:3) {
   }
   
   corr_table[is.na(corr_table)] = 0
-  write.csv(corr_table, paste0("pheno_roc_performance_PC", pcx, "_matrix.csv"), row.names = T)
+  write.csv(corr_table, paste0(input.yaml$output_dir,"pheno_roc_performance_PC", pcx, "_matrix.csv"), row.names = T)
   
 }
 
+message("\n  ...pheno PCA-ROC analysis complete \n ")
+stop = Sys.time()
+stop - start
