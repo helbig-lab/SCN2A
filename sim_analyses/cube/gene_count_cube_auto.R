@@ -7,6 +7,8 @@ library(stringr)
 start <- Sys.time()
 message(" \n Begin Cube similarity analysis - test of statistical significance  \n ")
 
+setwd(input.yaml$sim_dir)
+
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
 print("start")
