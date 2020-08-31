@@ -3,6 +3,8 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Begin Cube chunking and comparison of patients \n ")
 
+setwd(input.yaml$sim_dir)
+
 #HPO terms in cohort (base)
 
 pat_table_prop <- read_csv(input.yaml$file_path, "pos_prop.csv"))
