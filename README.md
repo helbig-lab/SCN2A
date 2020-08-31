@@ -33,6 +33,8 @@ Using the Human Phenotype Ontology (HPO) and a cohort of patients annotated via 
 
 * If the ```gene_count_cube_auto.R``` file does not run, confirm that extra row was not created during initial ```cube_scn2a.csv``` file processing.  If created, the extra row can be deleted manually or commented out line in script can be activated.
 
+## PCA-ROC Analyses
+These analyses run in two parts.  First, the ```run_pheno_k3.R``` and  ```run_variant_k3.R``` save the two PCA models of type ```.RData```, and then the other two scripts can be run for the downstream analysis and generating the output data frames using these models.  Because there are some many potential information components that may explain the phenotypic traits in any individual, these anlyses help narrow down to the most influential facotrs in determining these phenotypic traits.
 
 ## Frequency Analyses
 Using the Human Phenotype Ontology (HPO) and a cohort of patients annotated via HPO terms and VCF files, these scripts find frequency of phenotypic terms by specific groupings. For example, this analysis could be used to determine the frequency of occurrences of the term 'seizures' in patients with missense variants.  These frequencies are compared to frequencies in the remainder of each group to determine likelihood of occurence within that group. This helps determine which HPO terms may be causitively associated with a specific group. 
