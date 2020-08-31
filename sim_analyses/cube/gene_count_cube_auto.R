@@ -493,4 +493,4 @@ write.csv(gene_count,paste0(input.yaml$output_dir,"sim_analyses/gene_count_cube_
 
 message("\n  Cube similarity analysis - test of statistical significance ran successfully. \n ")
 stop = Sys.time()
-stop-start
+stop - start
