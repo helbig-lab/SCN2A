@@ -62,12 +62,12 @@ message('\n  Default to Resnik Similarity analysis algorithm \n')
 
 #Run sim_analysis files
 if(input.yaml$sim_dir == as.character("/sim_analyses/cube/")){
-source(cube_sim_auto_chunks.R)
-source(gene_count_cube_auto.R)
+source(paste0(input.yaml$sim_dir, cube_sim_auto_chunks.R))
+source(paste0(input.yaml$sim_dir, gene_count_cube_auto.R))
 }
 if(input.yaml$sim_dir == as.character("/sim_analyses/resnik/")){
-source(res_mod_auto_chunks.R)
-source(gene_count_resnik_mod_auto.R)
+source(paste0(input.yaml$sim_dir, res_mod_auto_chunks.R))
+source(paste0(input.yaml$sim_dir, gene_count_resnik_mod_auto.R)_
 }
 else{
 message('\n Please determine directory in input config file - Cant Proceed without that \n')
