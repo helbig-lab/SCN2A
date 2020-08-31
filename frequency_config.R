@@ -29,5 +29,8 @@ if (user_input("input", argv)) {
 if(is.null(input.yaml$freq_dir) == T){
   message('\n Please determine frequency analysis directory in input config file - Cant Proceed without that \n')
   break;
-  
+}
+else{
 source(paste0(input.yaml$freq_dir,frequency_tables.R))
+} 
+
