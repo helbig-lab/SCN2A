@@ -106,18 +106,9 @@ if(is.null(input.yaml$pca_dir) == F ){
   message("\n  Running PCA analysis... \n ")
   source(pca_config.R)
 }
-else{
-    message("\n  Checking for PCA analysis directory source... \n ")
-    source(pca_config.R)
-    if(is.null(input.yaml$pca_dir) == F){
-      message("\n  Running PCA analyses... \n ")
-      source(pca_config.R)
-    }
-    else {
-      next;
-    }
+else {
+  next;
 }
-
 
 #Frequency analyses
 if(is.null(input.yaml$freq_dir) == F){
