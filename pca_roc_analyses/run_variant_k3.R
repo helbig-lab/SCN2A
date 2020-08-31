@@ -97,7 +97,9 @@ logpca_model = logisticPCA(mat, k = j, m = which.min(logpca_cv))
   
 save(logpca_model, file=paste0("functional_variant_logpca_model_k", j, ".RData"))
 
-message(" \n variant data generated... \n ")
+message(" \n ...variant data generated \n ")
+stop = Sys.time()
+stop - start
 
 
 
