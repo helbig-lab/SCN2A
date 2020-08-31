@@ -9,7 +9,7 @@ message(" \n Starting frequency anaylses... \n ")
 # Read in files
 ######
 
-variants <- read.csv(input.yaml$variant_file), 
+variants <- read.csv(input.yaml$variant_file, 
                      stringsAsFactors = FALSE) %>% 
   filter(!is.na(famID)) %>% 
   filter(variant_type_1 != "exclude") %>% 
