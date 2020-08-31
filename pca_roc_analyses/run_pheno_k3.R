@@ -4,6 +4,9 @@ library(tidyverse)
 library(Hmisc)
 library(logisticPCA)
 
+start <- Sys.time()
+message(" \n Generating pca pheno PCA-ROC data... \n ")
+
 setwd(input.yaml$pca_dir)
 
 ################## 
@@ -76,5 +79,9 @@ logpca_cv = cv.lpca(mat, ks = j, ms = 1:10)
 logpca_model = logisticPCA(mat, k = j, m = which.min(logpca_cv)) 
   
 save(logpca_model, file=paste0("phenogroup_logpca_model_k", j, ".RData"))
+
+message("\n  ...pheno data generated \n ")
+stop = Sys.time()
+stop - start
 
 
