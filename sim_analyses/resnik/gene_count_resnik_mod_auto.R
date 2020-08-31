@@ -4,6 +4,8 @@
 library(tidyverse)
 library(stringr)
 
+setwd(input.yaml$sim_dir)
+
 start <- Sys.time()
 message(" \n Begin Resnik similarity analysis - test of statistical significance  \n ")
 
