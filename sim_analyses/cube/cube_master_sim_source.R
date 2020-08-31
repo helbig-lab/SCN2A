@@ -3,6 +3,8 @@ library(tidyverse)
 start <- Sys.time()
 message(" \n Cube source file running... \n ")
 
+setwd(input.yaml$sim_dir)
+
 pat_table_prop <- read_csv(paste0(input.yaml$file_path, "pos_prop_v14.csv"))
 
 #local_IC - use most recent version 
