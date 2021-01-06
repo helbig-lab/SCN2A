@@ -6,18 +6,18 @@
 * [R](https://www.r-project.org/) with packages tidyverse, stringr, dplyr, Hmisc, memoise, reshape2, readr, logisticPCA, ROCR, corrplot, and RColorBrewer.
 
 ### Steps to Run:
-* Clone the repository, modify the [config](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) file.
+* Clone the repository, modify the [config](https://github.com/helbig-lab/SCN2A/blob/develop/input.yml) file.
 
-* In the [config file](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) determine the main output_dir, this is where your output files would be written to.  Default parameters have been added for most aspects of the [config file](https://github.com/helbig-lab/SCN2A/blob/master/input.yml). Processing methods and algorithms of calculation for similarity analysis can be specified by the user in the terminal after running the below script. 
+* In the [config file](https://github.com/helbig-lab/SCN2A/blob/develop/input.yml) determine the main output_dir, this is where your output files would be written to.  Default parameters have been added for most aspects of the [config file](https://github.com/helbig-lab/SCN2A/blob/develop/input.yml). Processing methods and algorithms of calculation for similarity analysis can be specified by the user in the terminal after running the below script. 
 
-* Run [R file](https://github.com/helbig-lab/SCN2A/blob/master/master_config.R), specifying the YAML config file using the --input flag .
+* Run [R file](https://github.com/helbig-lab/SCN2A/blob/develop/master_config.R), specifying the YAML config file using the --input flag .
 
 ```
 ~/Rscript master_config.R --input /path_to/input.yml
 ```
 
 ### Running the tests
-There are test files available here: [Files](https://github.com/helbig-lab/SCN2A/tree/master/raw_files). Ensure that these files are linked appropriately in the [config file](https://github.com/helbig-lab/SCN2A/blob/master/input.yml) as such:
+There are test files available here: [Files](https://github.com/helbig-lab/SCN2A/tree/develop/raw_files). Ensure that these files are linked appropriately in the [config file](https://github.com/helbig-lab/SCN2A/blob/develop/input.yml) as such:
 
 ```
 
@@ -44,14 +44,14 @@ Because there are some many potential information components that may explain th
 Using the Human Phenotype Ontology (HPO) and a cohort of individuals annotated via HPO terms and VCF files, these scripts find frequency of phenotypic terms by specific groupings. For example, this analysis could be used to determine the frequency of occurrences of the HPO term 'seizures' in individuals with missense variants.  These frequencies are compared to frequencies in the remainder of each group to determine likelihood of occurence within that group. This helps determine which HPO terms may be causitively associated with a specific group. 
 
 ## Optional - Term Propagation
-Although not necessary to run these scripts, as example CSVs are already provided, we've included a term propagation script within the [raw files directory](https://github.com/helbig-lab/SCN2A/tree/master/raw_files). This allows users to generate the base and propagated HPO terms on their own in order to view the process first hand. To run the propagation scripts:
+Although not necessary to run these scripts, as example CSVs are already provided, we've included a term propagation script within the [raw files directory](https://github.com/helbig-lab/SCN2A/tree/develop/raw_files). This allows users to generate the base and propagated HPO terms on their own in order to view the process first hand. To run the propagation scripts:
 
-* In order to create manual base and propogation files, change the yaml default parameters ``` pos_ic : raw_files/post_IC.csv ``` to ``` pos_ic :  ``` and then run the [R file](https://github.com/helbig-lab/SCN2A/blob/master/master_config.R) (see below) to generate a manual csv file.
+* In order to create manual base and propogation files, change the yaml default parameters ``` pos_ic : raw_files/post_IC.csv ``` to ``` pos_ic :  ``` and then run the [R file](https://github.com/helbig-lab/SCN2A/blob/develop/master_config.R) (see below) to generate a manual csv file.
 
 ```
 ~/Rscript master_config.R --input /path_to/input.yml
 ```
 
-Note that this does not create the positive and negative propagation files, which are already provided in the [raw files directory](https://github.com/helbig-lab/SCN2A/tree/master/raw_files).
+Note that this does not create the positive and negative propagation files, which are already provided in the [raw files directory](https://github.com/helbig-lab/SCN2A/tree/develop/raw_files).
 
 
