@@ -29,3 +29,4 @@ if(input.yaml$sim_dir == as.character("sim_analyses/resnik/")){
   message('\n Please determine directory in input config file - Cant Proceed without that \n')
   break;
 }
+setwd("../../../")
