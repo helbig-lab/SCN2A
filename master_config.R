@@ -75,18 +75,32 @@ if(is.null(input.yaml$variant_file) == F){
 }
 
 #Term propagation
-if(is.null(input.yaml$pos_ic) == F ){
-  pos_ic <- read_csv(input.yaml$pos_ic)
- input.yaml$pos_ic <- pos_ic
-} else{
+ if(is.null(input.yaml$pos_ic) == T ){
     message("\n  Manually propagating information content... \n ")
     source("scripts/compose_base_prop_ic.R")
     input.yaml$pos_ic <- read_csv(paste0(input.yaml$output_dir,"pos_IC.csv"))
-  if(is.null(input.yaml$pos_ic) == T){
-    message("\n  Must use default propagation file or run compose_base_prop_ic.R to continue analyses... \n ")
-    break;
-  }
+    input.yaml$pos_prop <- paste0(input.yaml$output_dir,"pos_prop.csv")
+    input.yaml$neg_prop <- paste0(input.yaml$output_dir,"neg_prop.csv")
+} else {
+ pos_ic <- read_csv(input.yaml$pos_ic)
+ input.yaml$pos_ic <- pos_ic
 }
+
+
+if(is.null(input.yaml$pos_prop) == T ){
+source("scripts/compose_base_prop_ic.R")
+input.yaml$pos_prop <- paste0(input.yaml$output_dir,"pos_prop.csv")
+} else {
+system(paste0("cp ",input.yaml$pos_prop," ",input.yaml$output_dir," pos_prop.csv")
+}
+
+if(is.null(input.yaml$neg_prop) == T ){
+source("scripts/compose_base_prop_ic.R")
+input.yaml$neg_prop <- paste0(input.yaml$output_dir,"neg_prop.csv")
+} else {
+system(paste0("cp ",input.yaml$neg_prop," ",input.yaml$output_dir," neg_prop.csv")
+}
+
 
 if(is.null(input.yaml$n_subs) == T ){
 input.yaml$n_subs <- 20
@@ -110,7 +124,7 @@ if(is.null(input.yaml$sim_dir) == F ){
 }
 
 #PCA analyses
-if(is.null(input.yaml$pca_dir) == F ){
+if(is.null(input.yaml$pca) == F ){
   message("\n  Running PCA analysis... \n ")
   source("scripts/pca_config.R")
 }else {
@@ -118,7 +132,7 @@ if(is.null(input.yaml$pca_dir) == F ){
 }
 
 #Frequency analyses
-if(is.null(input.yaml$freq_dir) == F){
+if(is.null(input.yaml$freq) == F){
 message("\n  Running frequency analyses... \n ")
 source("scripts/frequency_config.R")
 }else {

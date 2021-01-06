@@ -24,11 +24,10 @@ n_subs: 42
 freq_dir: frequency_analyses #required
 
 # PCA Files
-pca_dir : pca_roc_analyses #required
+pca: yes
 functional_variant : raw_files/SCN2A_functional_variant_list.csv #required
-pos_prop : raw_files/pos_prop.csv
-neg_prop : raw_files/neg_prop.csv
 
 # Misc. Files
 #other_analyses : 
+freq: yes
 pos_ic : # default; pos_IC_manual.csv if created via 'compose_base_prop_ic.R' script
