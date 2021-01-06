@@ -1,23 +1,24 @@
-# Inputs for user
+# User Inputs
 
 # General files
-output_dir : /Users/Desktop/SCN2A/outputs/     # required
-file_path : raw_files/ # required
 
-hpo_tree :  raw_files/HPO_is.a_tree_v0.1.2.csv     # required
-hpo_ancestor : raw_files/HPO_ancestors_v0.1.2.csv      # required
-hpo_path : raw_files/HPO_child_paths_v0.1.2.csv      # required
+output_dir : /mnt/isilon/helbig_lab/projects/SCN2A/check_git/outputs/     # required
+file_path : /mnt/isilon/helbig_lab/projects/SCN2A/check_git/raw_files/ # required
+
+hpo_tree :  /mnt/isilon/helbig_lab/projects/SCN2A/check_git/raw_files/HPO_is.a_tree_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv    # required
+hpo_ancestor : /mnt/isilon/helbig_lab/projects/SCN2A/check_git/raw_files/HPO_ancestors_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv      # required
+hpo_path : /mnt/isilon/helbig_lab/projects/SCN2A/check_git/raw_files/HPO_child_paths_v0.1.2_dl-2019-02-05_rl_2018-12-21.csv      # required
 
 num_of_iterations : 100000 # required default is 100000
 
-variant_file : raw_files/SCN2A_full.csv       # required
+variant_file : /mnt/isilon/helbig_lab/projects/SCN2A/check_git/raw_files/SCN2A_full_V15.csv       # required
 
-# Sim Files
-sim_algorithm : 1  # optional 1 - Resnik default ; 2 - Cube
-cluster : c # c - Cluster default ; m - Manual processing
-sim_cluster: # returned by user if cluster selected
+# Similarity analysis
+sim_algorithm : 2  # optional 1 - Resnik default ; 2 - Cube
 
-sim_dir: # determined automatically by user's selected sim_algorithm
+# Number of chunks / jobs to be submitted
+n_subs: 42
+
 
 # Frequency Files
 freq_dir: frequency_analyses #required
@@ -30,4 +31,4 @@ neg_prop : raw_files/neg_prop.csv
 
 # Misc. Files
 #other_analyses : 
-pos_ic : raw_files/pos_IC.csv # default; pos_IC_manual.csv if created via 'compose_base_prop_ic.R' script
+pos_ic : # default; pos_IC_manual.csv if created via 'compose_base_prop_ic.R' script
