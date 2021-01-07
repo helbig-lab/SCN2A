@@ -19,13 +19,9 @@ sim_algorithm : 2  # optional 1 - Resnik default ; 2 - Cube
 # Number of chunks / jobs to be submitted
 n_subs: 42
 
-
-# Frequency Files
-freq_dir: frequency_analyses #required
-
 # PCA Files
 pca: yes
-functional_variant : raw_files/SCN2A_functional_variant_list.csv #required
+functional_variant : raw_files/SCN2A_functional_variant_list.csv #required if pca is yes
 
 # Misc. Files
 #other_analyses : 
