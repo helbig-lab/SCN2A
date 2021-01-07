@@ -79,8 +79,8 @@ if(is.null(input.yaml$variant_file) == F){
     message("\n  Manually propagating information content... \n ")
     source("scripts/compose_base_prop_ic.R")
     input.yaml$pos_ic <- read_csv(paste0(input.yaml$output_dir,"pos_IC.csv"))
-    input.yaml$pos_prop <- paste0(input.yaml$output_dir,"pos_prop.csv")
-    input.yaml$neg_prop <- paste0(input.yaml$output_dir,"neg_prop.csv")
+    # input.yaml$pos_prop <- paste0(input.yaml$output_dir,"pos_prop.csv")
+    # input.yaml$neg_prop <- paste0(input.yaml$output_dir,"neg_prop.csv")
 } else {
  pos_ic <- read_csv(input.yaml$pos_ic)
  input.yaml$pos_ic <- pos_ic
@@ -91,14 +91,14 @@ if(is.null(input.yaml$pos_prop) == T ){
 source("scripts/compose_base_prop_ic.R")
 input.yaml$pos_prop <- paste0(input.yaml$output_dir,"pos_prop.csv")
 } else {
-system(paste0("cp ",input.yaml$pos_prop," ",input.yaml$output_dir," pos_prop.csv")
+system(paste0("cp ",input.yaml$pos_prop," ",input.yaml$output_dir," pos_prop.csv"))
 }
 
 if(is.null(input.yaml$neg_prop) == T ){
 source("scripts/compose_base_prop_ic.R")
 input.yaml$neg_prop <- paste0(input.yaml$output_dir,"neg_prop.csv")
 } else {
-system(paste0("cp ",input.yaml$neg_prop," ",input.yaml$output_dir," neg_prop.csv")
+system(paste0("cp ",input.yaml$neg_prop," ",input.yaml$output_dir," neg_prop.csv"))
 }
 
 
@@ -107,8 +107,9 @@ input.yaml$n_subs <- 20
 }
 
 
+message("Starting Sim Analysis")
 
-#Similarity analyses
+Similarity analyses
 if(is.null(input.yaml$sim_dir) == F ){
   message("\n  Running similarity analysis... \n ")
   source("scripts/sim_config.R")
