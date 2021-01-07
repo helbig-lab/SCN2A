@@ -13,7 +13,7 @@
 * Run [R file](https://github.com/helbig-lab/SCN2A/blob/develop/master_config.R), specifying the YAML config file using the --input flag .
 
 ```
-~/Rscript master_config.R --input /path_to/input.yml
+Rscript master_config.R --input /path_to/input.yml
 ```
 
 ### Running the tests
